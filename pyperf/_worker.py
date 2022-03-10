@@ -76,6 +76,11 @@ class WorkerTask:
               self.task_func(self, self.loops)
               e_1 = ctypes.c_ulonglong(c_lib.readen(os.environ.get("ENFILE").encode('utf-8')))
               raw_value = float(e_1.value) - float(e_0.value)
+            elif self.args.profile_heap:
+              from scalene import scalene_profiler
+              scalene_profiler.start()
+              raw_value = float(self.task_func(self, self.loops))
+              scalene_profiler.stop()
             else:
               raw_value = float(self.task_func(self, self.loops))
             value = raw_value / (self.loops * inner_loops)

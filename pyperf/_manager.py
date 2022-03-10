@@ -39,10 +39,7 @@ class Manager(object):
     def worker_cmd(self, calibrate_loops, calibrate_warmups, wpipe):
         args = self.args
 
-        if args.profile_heap:
-            cmd = [self.python, '-m', 'scalene', '--off', '--html', '--outfile', self.bench.get_name()]
-        else:
-            cmd = [self.python]
+        cmd = [self.python]
         cmd.extend(self.runner._program_args)
         cmd.extend(('--worker', '--pipe', str(wpipe),
                     '--worker-task=%s' % self.runner._worker_task,
@@ -72,9 +69,6 @@ class Manager(object):
             cmd.append('--track-energy')
         if args.profile_heap:
             cmd.append('--profile-heap')
-            #	No point in extra runs when heap
-            #	profiling is performed.	
-            cmd.append('--debug-single-value')
 
         if self.runner._add_cmdline_args:
             self.runner._add_cmdline_args(cmd, args)

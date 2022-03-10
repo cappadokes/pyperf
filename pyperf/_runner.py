@@ -223,7 +223,7 @@ class Runner:
                             help="Measure energy instead of wall clock time.")
         parser.add_argument("--profile-heap",
                             action="store_true",
-                            help="Record heap profile using Scalene.")
+                            help="Record heap profile using heaptrack.")
 
         memory = parser.add_mutually_exclusive_group()
         memory.add_argument('--tracemalloc', action="store_true",
